@@ -79,7 +79,7 @@ function displayMovements(movements, sort = false) {
           <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-          <div class="movements__value">${mov}ksh</div>
+          <div class="movements__value">${mov.toFixed(2)}ksh</div>
         </div>`;
 
     containerMovements.insertAdjacentHTML('afterbegin', html);
@@ -88,19 +88,19 @@ function displayMovements(movements, sort = false) {
 
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc.balance}ksh`;
+  labelBalance.textContent = `${acc.balance.toFixed(2)}ksh`;
 };
 
 const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, cur) => acc + cur);
-  labelSumIn.textContent = `${incomes}ksh`;
+  labelSumIn.textContent = `${incomes.toFixed(2)}ksh`;
 
   const outcomes = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, cur) => acc + cur, 0);
-  labelSumOut.textContent = `${Math.abs(outcomes)}ksh`;
+  labelSumOut.textContent = `${Math.abs(outcomes.toFixed(2))}ksh`;
 
   const interest = acc.movements
     .filter(mov => mov > 0)
@@ -109,7 +109,7 @@ const calcDisplaySummary = function (acc) {
       return int >= 1;
     })
     .reduce((acc, int) => acc + int);
-  labelSumInterest.textContent = `${interest}ksh`;
+  labelSumInterest.textContent = `${interest.toFixed(2)}ksh`;
 };
 
 function createUsernames(acc) {
@@ -135,7 +135,8 @@ function updateUI(curr) {
   calcDisplaySummary(curr);
 }
 
-//EVENT HANDLERS
+/////EVENT HANDLERS///////
+
 let curAccount;
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
@@ -143,7 +144,7 @@ btnLogin.addEventListener('click', function (e) {
 
   curAccount = accounts.find(acc => acc.username === inputLoginUsername.value);
   console.log(curAccount);
-  if (curAccount?.pin === Number(inputLoginPin.value)) {
+  if (curAccount?.pin === +inputLoginPin.value) {
     // Display UI and welcome message
     labelWelcome.textContent = `Welcome back ${curAccount.owner.split(' ')[0]}`;
     containerApp.style.opacity = 100;
@@ -153,13 +154,23 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginPin.value = '';
     inputLoginPin.blur();
 
+    // Display Date
+    const now = new Date();
+    console.log(now);
+    const day = `${now.getDate()}`.padStart(2, 0);
+    const month = `${now.getMonth() + 1}`.padStart(2, 0);
+    const year = now.getFullYear();
+    const hour = `${now.getHours()}`.padStart(2, 0);
+    const mins = `${now.getMinutes()}`.padStart(2, 0);
+    labelDate.textContent = `${day}/${month}/${year}, ${hour}:${mins}`;
+
     updateUI(curAccount);
   }
 });
 
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
-  const amount = Number(inputTransferAmount.value);
+  const amount = +inputTransferAmount.value;
   const receiverAcc = accounts.find(
     acc => acc.username === inputTransferTo.value
   );
@@ -186,7 +197,7 @@ btnTransfer.addEventListener('click', function (e) {
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const amount = Number(inputLoanAmount.value);
+  const amount = +inputLoanAmount.value;
 
   if (amount > 0 && curAccount.movements.some(mov => mov > amount * 0.1)) {
     curAccount.movements.push(amount);
@@ -201,7 +212,7 @@ btnClose.addEventListener('click', function (e) {
   e.preventDefault();
   if (
     inputCloseUsername.value === curAccount.username &&
-    Number(inputClosePin.value) === curAccount.pin
+    +inputClosePin.value === curAccount.pin
   ) {
     const index = accounts.findIndex(
       acc => acc.username === curAccount.username
