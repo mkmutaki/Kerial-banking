@@ -135,9 +135,39 @@ function updateUI(curr) {
   calcDisplaySummary(curr);
 }
 
+function startLogOutTimer() {
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+
+    // Each call, print the remaining time to UI
+    labelTimer.textContent = `${min}:${sec}`;
+
+    // When t=0s, stop timer and logout user
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = 'Log in to get started';
+      containerApp.style.opacity = 0;
+    }
+
+    // Decrease by 1s
+    time--;
+  };
+
+  // Set Time to 10 mins
+  let time = 600;
+
+  // Call the timer every second
+  tick();
+  const timer = setInterval(tick, 1000);
+
+  return timer;
+}
+
 /////EVENT HANDLERS///////
 
-let curAccount;
+let curAccount, timer;
+
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
   e.preventDefault();
@@ -153,6 +183,10 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginUsername.value = '';
     inputLoginPin.value = '';
     inputLoginPin.blur();
+
+    //Timer
+    if (timer) clearInterval(timer);
+    timer = startLogOutTimer();
 
     // Display Date
     const now = new Date();
@@ -192,6 +226,10 @@ btnTransfer.addEventListener('click', function (e) {
   // Clear input fields
   inputTransferTo.value = '';
   inputTransferAmount.value = '';
+
+  //Reset Timer
+  clearInterval(timer);
+  timer = startLogOutTimer();
 });
 
 btnLoan.addEventListener('click', function (e) {
@@ -206,6 +244,10 @@ btnLoan.addEventListener('click', function (e) {
     updateUI(curAccount);
   }
   inputLoanAmount.value = '';
+
+  //Reset Timer
+  clearInterval(timer);
+  timer = startLogOutTimer();
 });
 
 btnClose.addEventListener('click', function (e) {
