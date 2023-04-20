@@ -1,7 +1,7 @@
 # Bankist-WebApp 💵💶💷
 
 ## About :
-🔴 The 'Bankist WebApp' functions as a miniature replica of a bank that performs basic operations like **money transfers**, **loan requests**, **account closures**, and **viewing your balance**. Moreover, all transactions will be listed in the log as either **withdrawals** or **deposits**.
+🔴 The 'Bankist WebApp' functions as a miniature replica of a bank that performs basic operations like **money transfers**, **loan requests**, **account closures**, and **viewing your balance**. Moreover, all transactions will be listed in the log as either **withdrawals** or **deposits** with there given timestamps.
 
 🔴 The WebApp's **sort feature** also enables users to view all their transactions from the highest to lowest amounts.
 
