@@ -14,8 +14,7 @@
 | Jonas Schmedtmann  | js  | 1111  |
 | Jessica Davis  | jd  | 2222  |
 | Steven Thomas Williams  | stw  | 3333  |
-| Sarah Smith  | ss  | 4444  |
-| Gerald Fitz  | gf  | 5555  |
+| Gerald Fitz  | gf  | 4444  |
 
  ## Languages used:
 <code><img src="https://img.icons8.com/color/48/000000/html-5--v1.png"/></code>
