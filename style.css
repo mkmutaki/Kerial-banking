@@ -295,3 +295,82 @@ h2 {
 .timer {
   font-weight: 600;
 }
+
+/* RESPONSIVE DESIGN */
+@media screen and (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+
+  nav {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .welcome {
+    font-size: 1.6rem;
+    text-align: center;
+    order: 1;
+  }
+
+  .logo {
+    height: 4rem;
+    order: 0;
+  }
+
+  .login {
+    order: 2;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .login__input {
+    width: 10rem;
+    font-size: 1.4rem;
+    margin-right: 0;
+  }
+
+  .login__btn {
+    font-size: 1.8rem;
+  }
+
+  .app {
+    margin: 2rem auto;
+    max-width: 95%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  nav {
+    gap: 1rem;
+  }
+
+  .welcome {
+    font-size: 1.4rem;
+  }
+
+  .logo {
+    height: 3.5rem;
+  }
+
+  .login {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .login__input {
+    width: 12rem;
+    font-size: 1.3rem;
+  }
+
+  .login__btn {
+    font-size: 1.6rem;
+    padding: 0.5rem 1rem;
+    background-color: #f3f3f3;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+  }
+}

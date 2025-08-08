@@ -160,11 +160,10 @@ function displayMovements(acc, sort = false) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 }
-
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = formatCurrency(
-    acc.balance,
+    acc.balance, 
     acc.locale,
     acc.currency
   );
@@ -200,7 +199,7 @@ const calcDisplaySummary = function (acc) {
 };
 
 function createUsernames(acc) {
-  acc.forEach(function (accs) {
+  acc.forEach(function (accs) { 
     accs.username = accs.owner
       .toLowerCase()
       .split(' ')
