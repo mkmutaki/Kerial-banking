@@ -21,6 +21,7 @@ body {
   background-color: #f3f3f3;
   height: 100vh;
   padding: 2rem;
+  overflow-x: hidden;
 }
 
 nav {
@@ -96,6 +97,7 @@ nav {
   /* NOTE This creates the fade in/out anumation */
   opacity: 0;
   transition: all 1s;
+  overflow-x: hidden;
 }
 
 .balance {
@@ -259,6 +261,7 @@ h2 {
   padding: 0.3rem 1rem;
   border-radius: 0.7rem;
   transition: all 0.3s;
+  min-height: 44px; /* Better touch target for mobile */
 }
 
 .form__input:focus {
@@ -278,6 +281,7 @@ h2 {
   background-color: #fff;
   cursor: pointer;
   transition: all 0.3s;
+  min-height: 44px; /* Better touch target for mobile */
 }
 
 .form__btn:focus {
@@ -297,6 +301,28 @@ h2 {
 }
 
 /* RESPONSIVE DESIGN */
+
+/* Large tablets and small desktops (1024px and below) */
+@media screen and (max-width: 1024px) {
+  .app {
+    max-width: 95%;
+    gap: 1.5rem;
+  }
+
+  .balance__value {
+    font-size: 3.8rem;
+  }
+
+  .operation {
+    padding: 2.5rem 3rem;
+  }
+
+  .form {
+    gap: 0.3rem 0.8rem;
+  }
+}
+
+/* Medium tablets (768px and below) */
 @media screen and (max-width: 768px) {
   body {
     padding: 1rem;
@@ -339,12 +365,171 @@ h2 {
   .app {
     margin: 2rem auto;
     max-width: 95%;
+    display: block;
+    gap: 0;
+  }
+
+  .balance {
+    margin-bottom: 2rem;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .balance__value {
+    font-size: 3.5rem;
+  }
+
+  .movements {
+    margin-bottom: 2rem;
+    max-height: 300px;
+  }
+
+  .movements__row {
+    padding: 1.5rem 2rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .movements__type {
+    margin-right: 1rem;
+  }
+
+  .movements__value {
+    margin-left: 0;
+    width: 100%;
+    text-align: right;
+    margin-top: 0.5rem;
+  }
+
+  .summary {
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .summary__label {
+    margin-right: 0.5rem;
+  }
+
+  .summary__value {
+    margin-right: 1rem;
+  }
+
+  .btn--sort {
+    margin-left: 0;
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.8rem;
+    background-color: #f3f3f3;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+  }
+
+  .operation {
+    margin-bottom: 2rem;
+    padding: 2rem 2.5rem;
+  }
+
+  .form {
+    gap: 1rem;
+  }
+
+  .form.form--loan {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .form__input--loan-amount {
+    grid-column: 1 / -1;
+  }
+
+  .form__btn--loan {
+    grid-column: 1 / -1;
+  }
+
+  .form__label--loan {
+    grid-column: 1 / -1;
+    text-align: center;
+    grid-row: 2;
+  }
+
+  .logout-timer {
+    text-align: center;
+    font-size: 1.4rem;
+    margin-top: 2rem;
   }
 }
 
+/* Small tablets and large phones (480px to 768px) */
+@media screen and (max-width: 600px) {
+  .form {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, auto);
+    gap: 1rem;
+  }
+
+  .form.form--loan {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, auto);
+  }
+
+  .form__input,
+  .form__btn {
+    grid-column: 1;
+  }
+
+  .form__label {
+    order: -1;
+    text-align: left;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .form__label--loan {
+    grid-row: unset;
+    grid-column: 1;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .balance__value {
+    font-size: 3rem;
+  }
+
+  .movements__row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 1.5rem 1.5rem;
+  }
+
+  .movements__date {
+    align-self: flex-end;
+    font-size: 1rem;
+  }
+
+  .movements__value {
+    align-self: flex-end;
+    margin-top: 0;
+    font-size: 1.5rem;
+  }
+}
+
+/* Mobile phones (480px and below) */
 @media screen and (max-width: 480px) {
+  body {
+    padding: 0.5rem;
+  }
+
   nav {
     gap: 1rem;
+    padding: 0.5rem;
   }
 
   .welcome {
@@ -372,5 +557,87 @@ h2 {
     background-color: #f3f3f3;
     border: 1px solid #ccc;
     border-radius: 0.5rem;
+  }
+
+  .app {
+    margin: 1rem auto;
+    max-width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  .balance {
+    margin-bottom: 1.5rem;
+  }
+
+  .balance__value {
+    font-size: 2.5rem;
+  }
+
+  .balance__label {
+    font-size: 1.8rem;
+  }
+
+  .balance__date {
+    font-size: 1.2rem;
+  }
+
+  .movements {
+    margin-bottom: 1.5rem;
+    max-height: 250px;
+  }
+
+  .movements__row {
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+
+  .movements__type {
+    font-size: 1rem;
+    padding: 0.1rem 0.8rem;
+  }
+
+  .summary {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .summary__label,
+  .summary__value {
+    margin-right: 0;
+  }
+
+  .btn--sort {
+    margin-top: 0;
+  }
+
+  .operation {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form__input {
+    font-size: 1.4rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .form__label {
+    font-size: 1.2rem;
+  }
+
+  .form__btn {
+    font-size: 1.6rem;
+    padding: 0.8rem;
+  }
+
+  .logout-timer {
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
   }
 }
